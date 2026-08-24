@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#f29401" />
+    </marker>
+    <style>
+      .box{fill:#fff7eb;stroke:#f29401;stroke-width:3;rx:18;ry:18;}
+      .box2{fill:#eef8ff;stroke:#2b7bbb;stroke-width:3;rx:18;ry:18;}
+      .txt{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;font-size:28px;fill:#333;font-weight:600;}
+      .sub{font-family:'Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;font-size:20px;fill:#555;}
+      .line{stroke:#f29401;stroke-width:5;fill:none;marker-end:url(#arrow);}
+    </style>
+  </defs>
+  <rect width="1200" height="360" fill="#ffffff"/>
+  <rect class="box" x="40" y="90" width="180" height="130"/>
+  <text class="txt" x="130" y="140" text-anchor="middle">飞书/ TUI</text>
+  <text class="sub" x="130" y="176" text-anchor="middle">输入自然语言任务</text>
+  <path class="line" d="M230 155 H315"/>
+  <rect class="box2" x="330" y="70" width="220" height="170"/>
+  <text class="txt" x="440" y="125" text-anchor="middle">OpenClaw</text>
+  <text class="sub" x="440" y="162" text-anchor="middle">任务拆解 / 记忆</text>
+  <text class="sub" x="440" y="194" text-anchor="middle">调用 ROS2 服务</text>
+  <path class="line" d="M560 155 H650"/>
+  <rect class="box" x="670" y="70" width="210" height="170"/>
+  <text class="txt" x="775" y="125" text-anchor="middle">TurboPi</text>
+  <text class="sub" x="775" y="162" text-anchor="middle">巡线到 A/B/C 区</text>
+  <text class="sub" x="775" y="194" text-anchor="middle">识别并夹取元件</text>
+  <path class="line" d="M890 155 H970"/>
+  <rect class="box2" x="990" y="90" width="170" height="130"/>
+  <text class="txt" x="1075" y="140" text-anchor="middle">反馈结果</text>
+  <text class="sub" x="1075" y="176" text-anchor="middle">库存/照片/状态</text>
+  <path class="line" d="M1075 225 C1075 300 130 300 130 230"/>
+</svg>

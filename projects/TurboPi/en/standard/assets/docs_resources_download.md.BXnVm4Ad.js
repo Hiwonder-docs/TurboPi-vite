@@ -1,0 +1,13 @@
+import { _ as _export_sfc, o as openBlock, c as createElementBlock, ah as createStaticVNode } from "./chunks/framework.Csiwy0Wj.js";
+const __pageData = JSON.parse('{"title":"Appendix","description":"","frontmatter":{},"headers":[],"relativePath":"docs/resources_download.md","filePath":"docs/resources_download.md"}');
+const _sfc_main = { name: "docs/resources_download.md" };
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", null, [..._cache[0] || (_cache[0] = [
+    createStaticVNode('<h1 id="appendix" tabindex="-1">Appendix <a class="header-anchor" href="#appendix" aria-label="Permalink to &quot;Appendix&quot;">​</a></h1><ul><li>System Image &amp; Source Code：If you want to get the system image and source code, please email us at <a href="mailto:support@hiwonder.com" target="_blank" rel="noreferrer">support@hiwonder.com</a>, and share your order number 😃</li><li>SD Card Formatting Tool：<a href="https://drive.google.com/drive/folders/1ccPgiDB3uLotfyrotek_aKl6Tl9FoV_g?usp=sharing" target="_blank" rel="noreferrer">SD_CardFormatter0500SetupEN.exe</a></li><li>Image Burning Tool：<a href="https://drive.google.com/drive/folders/1ioDdr1ywd_1Ko8r6FBgMY13vBoF4cWAx?usp=sharing" target="_blank" rel="noreferrer">Image Burning Tool.zip</a></li><li>PuTTY（ssh）32bit：<a href="https://drive.google.com/drive/folders/1Jf92DfW07wkucgNCvkfFrZQdcP3qSPJe?usp=sharing" target="_blank" rel="noreferrer">putty-0.72-installer.msi</a></li><li>PuTTY（ssh）64bit：<a href="https://drive.google.com/drive/folders/1P-1FL6vCeC5HYYU9ksEalqnTlEYaunXW?usp=sharing" target="_blank" rel="noreferrer">putty-64bit-0.72-installer.msi</a></li><li>VNC：<a href="https://drive.google.com/drive/folders/1SI5Jxmp63KxeKrcvm5y4XE7fsNfrIZad?usp=sharing" target="_blank" rel="noreferrer">VNC-Viewer-6.17.731-Windows.exe</a></li><li>MobaXterm：<a href="https://drive.google.com/drive/folders/1QbjTg23EmtQkQojAJkyRK95_elvL7sC8?usp=sharing" target="_blank" rel="noreferrer">MobaXterm_Installer_v22.1.zip</a></li><li>File Transferring Tool：<a href="https://drive.google.com/drive/folders/1C7EuIE-0HHNerIY1HGWBVvhwP9w9YMJE?usp=sharing" target="_blank" rel="noreferrer">WinSCP-5.15.3-Setup.exe</a></li><li>APP Installation Pack (Android)：<a href="https://play.google.com/store/apps/details?id=com.Wonder.Pi" target="_blank" rel="noreferrer">WonderPi</a></li><li>APP Installation Pack (iOS)：<a href="https://apps.apple.com/cn/app/wonderpi/id1477946178" target="_blank" rel="noreferrer">WonderPi</a></li></ul>', 2)
+  ])]);
+}
+const resources_download = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
+export {
+  __pageData,
+  resources_download as default
+};
