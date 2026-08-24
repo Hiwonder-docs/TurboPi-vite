@@ -1,7 +1,8 @@
 # TurboPi Documentation
 
-This repository contains the TurboPi VitePress documentation site. The
-documentation source files are Markdown files under `docs/docs/`.
+This repository contains the TurboPi VitePress documentation site. The source
+files for each version are stored under `content/standard/docs/` and
+`content/advanced/docs/`.
 
 ## Local development
 
@@ -19,7 +20,10 @@ npm run docs:build
 npm run docs:stage-main
 ```
 
-The staged production files are generated in `projects/TurboPi/en/latest/`.
+The staged production files are generated in:
+
+- `projects/TurboPi/en/standard/`
+- `projects/TurboPi/en/advanced/`
 
 ## GitHub Pages deployment
 
@@ -30,11 +34,11 @@ The build artifacts under `projects/` are committed to the repository. Open
 The GitHub Pages direct URL is:
 
 ```text
-https://GITHUB-USERNAME.github.io/TurboPi-vite/projects/TurboPi/en/latest/
+https://GITHUB-USERNAME.github.io/TurboPi-vite/projects/TurboPi/en/standard/
 ```
 
 The public-facing URL (via the baota Nginx reverse proxy) is:
 
 ```text
-https://wiki-test.hiwonder.com/projects/TurboPi/en/latest/
+https://wiki.hiwonder.com/projects/TurboPi/en/standard/
 ```

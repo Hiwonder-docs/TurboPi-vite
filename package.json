@@ -1,14 +1,15 @@
 {
   "scripts": {
+    "build": "npm run build:all",
     "docs:dev": "vitepress dev docs",
-    "dev:standard": "node scripts/dev_version.mjs standard",
-    "dev:advanced": "node scripts/dev_version.mjs advanced",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "docs:stage-main": "node scripts/stage_main_site.mjs",
     "build:standard": "node scripts/build_version.mjs standard",
     "build:advanced": "node scripts/build_version.mjs advanced",
-    "build:all": "node scripts/build_version.mjs standard && node scripts/build_version.mjs advanced"
+    "build:v1.1": "node scripts/build_version.mjs standard",
+    "build:v1.2": "node scripts/build_version.mjs advanced",
+    "build:all": "npm run build:standard && npm run build:advanced"
   },
   "dependencies": {
     "vitepress": "^1.6.4"
