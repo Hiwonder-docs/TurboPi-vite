@@ -3102,7 +3102,7 @@ const _sfc_main$v = /* @__PURE__ */ defineComponent({
   __name: "VPNavBarSearch",
   __ssrInlineRender: true,
   setup(__props) {
-    const VPLocalSearchBox = defineAsyncComponent(() => import("./VPLocalSearchBox.CYp91OIV.js"));
+    const VPLocalSearchBox = defineAsyncComponent(() => import("./VPLocalSearchBox.Cx0jYIi3.js"));
     const VPAlgoliaSearchBox = () => null;
     const { theme: theme2 } = useData();
     const loaded = ref(false);
@@ -5029,16 +5029,21 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const { frontmatter } = useData$1();
     const route = useRoute();
+    const versionItems = [
+      { key: "standard", label: "Standard" },
+      { key: "advanced", label: "Advanced" }
+    ];
+    function getCurrentVersionKey() {
+      var _a;
+      return ((_a = versionItems.find((item) => location.pathname.includes(`/en/${item.key}/`))) == null ? void 0 : _a.key) || versionItems[0].key;
+    }
     function injectVersionSwitcher() {
       if (!inBrowser) return;
       const navList = document.querySelector(".VPNavBarMenu");
       if (!navList) return;
       if (navList.querySelector(".version-switcher")) return;
-      const current = location.pathname.includes("/en/advanced/") ? "advanced" : "standard";
-      const labels = {
-        standard: "Standard",
-        advanced: "Advanced"
-      };
+      const current = getCurrentVersionKey();
+      const labels = Object.fromEntries(versionItems.map((item) => [item.key, item.label]));
       const li = document.createElement("li");
       li.className = "version-switcher";
       li.innerHTML = `
@@ -5047,8 +5052,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       <span class="version-switcher__name">${labels[current]}</span>
     </button>
     <ul class="version-switcher__menu" style="display:none">
-      <li class="version-switcher__item ${current === "standard" ? "is-selected" : ""}" data-version="standard">Standard</li>
-      <li class="version-switcher__item ${current === "advanced" ? "is-selected" : ""}" data-version="advanced">Advanced</li>
+      ${versionItems.map(
+        (item) => `<li class="version-switcher__item ${current === item.key ? "is-selected" : ""}" data-version="${item.key}">${item.label}</li>`
+      ).join("")}
     </ul>
   `;
       const trigger = li.querySelector(".version-switcher__trigger");
@@ -5078,14 +5084,14 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     function interceptCrossVersionLinks() {
       if (!inBrowser) return;
       document.addEventListener("click", (e) => {
-        var _a;
+        var _a, _b;
         const link2 = (_a = e.target) == null ? void 0 : _a.closest("a");
         if (!link2) return;
         const href = link2.getAttribute("href") || "";
         if (!href || href.startsWith("http://") || href.startsWith("https://")) return;
-        const currentVersion = location.pathname.includes("/en/advanced/") ? "advanced" : "standard";
-        const otherVersion = currentVersion === "standard" ? "advanced" : "standard";
-        if (href.includes(`/en/${otherVersion}/`)) {
+        const currentVersion = getCurrentVersionKey();
+        const targetVersion = (_b = versionItems.find((item) => href.includes(`/en/${item.key}/`))) == null ? void 0 : _b.key;
+        if (targetVersion && targetVersion !== currentVersion) {
           e.preventDefault();
           e.stopPropagation();
           const origin = window.location.origin;

@@ -133,6 +133,99 @@ function trimWhitespaceInsideStrong(code: string) {
 }
 
 
+function convertNoteContainersToGitHubAlerts(code: string) {
+  const lines = code.split('\n')
+  const normalizedLines: string[] = []
+  let inFence = false
+  let activeFenceMarker = ''
+  let changed = false
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index]
+    const trimmed = line.trimStart()
+    const fenceMatch = trimmed.match(fencePattern)
+
+    if (fenceMatch) {
+      const marker = fenceMatch[1]
+      if (!inFence) {
+        inFence = true
+        activeFenceMarker = marker
+      } else if (marker[0] === activeFenceMarker[0] && marker.length >= activeFenceMarker.length) {
+        inFence = false
+        activeFenceMarker = ''
+      }
+      normalizedLines.push(line)
+      continue
+    }
+
+    const noteOpenMatch = line.match(/^\s*(:{3,4})\{[Nn]ote\}\s*$/)
+    if (inFence || !noteOpenMatch) {
+      normalizedLines.push(line)
+      continue
+    }
+
+    const closePattern = new RegExp('^\\s*' + noteOpenMatch[1] + '\\s*$')
+    normalizedLines.push('> [!NOTE]')
+    changed = true
+
+    while (index + 1 < lines.length) {
+      index += 1
+      const contentLine = lines[index]
+      if (closePattern.test(contentLine)) {
+        break
+      }
+      normalizedLines.push(contentLine ? `> ${contentLine}` : '>')
+    }
+  }
+
+  return changed ? normalizedLines.join('\n') : code
+}
+
+function normalizeMarkdownImagePathSlashes(code: string) {
+  return code
+    .replace(/(!\[[^\]\n]*\]\()([^\)\n]+)(\))/g, (match, prefix: string, rawSrc: string, suffix: string) => {
+      if (!rawSrc.includes('\\') || /^(?:https?:|data:|#)/i.test(rawSrc) || /^[A-Za-z]:\\/.test(rawSrc)) {
+        return match
+      }
+      return `${prefix}${rawSrc.replace(/\\/g, '/')}${suffix}`
+    })
+    .replace(/(<img\b[^>]*\bsrc=["'])([^"']+)(["'][^>]*>)/g, (match, prefix: string, rawSrc: string, suffix: string) => {
+      if (!rawSrc.includes('\\') || /^(?:https?:|data:|#)/i.test(rawSrc) || /^[A-Za-z]:\\/.test(rawSrc)) {
+        return match
+      }
+      return `${prefix}${rawSrc.replace(/\\/g, '/')}${suffix}`
+    })
+}
+
+function normalizeNoteContainers() {
+  return {
+    name: 'normalize-note-containers',
+    enforce: 'pre' as const,
+    transform(code: string, id: string) {
+      if (!id.endsWith('.md') || !/^[ \t]*:{3,4}\{[Nn]ote\}[ \t]*$/m.test(code)) {
+        return null
+      }
+
+      const transformed = convertNoteContainersToGitHubAlerts(code)
+      return transformed === code ? null : transformed
+    }
+  }
+}
+
+function normalizeImagePathSlashes() {
+  return {
+    name: 'normalize-image-path-slashes',
+    enforce: 'pre' as const,
+    transform(code: string, id: string) {
+      if (!id.endsWith('.md') || !code.includes('\\')) {
+        return null
+      }
+
+      const transformed = normalizeMarkdownImagePathSlashes(code)
+      return transformed === code ? null : transformed
+    }
+  }
+}
 function preserveBrokenAbsoluteImages() {
   const imageTagPattern = /<img\b[^>]*\bsrc="([A-Za-z]:\\[^"]+)"[^>]*\/?>/g
 
@@ -648,6 +741,8 @@ export default defineConfig({
   vite: {
     assetsInclude: ['**/*.PNG', '**/*.JPG', '**/*.JPEG', '**/*.WEBP', '**/*.BMP', '**/*.ICO', '**/*.SVG', '**/*.MP4', '**/*.MOV', '**/*.AVI', '**/*.WAV', '**/*.MP3', '**/*.emf', '**/*.EMF', '**/*.wmf', '**/*.WMF', '**/*.GIF', '**/*.db'],
     plugins: [
+      normalizeNoteContainers(),
+      normalizeImagePathSlashes(),
       normalizeStrongWhitespace(),
       normalizeProblematicStrongEmphasis(),
       preserveBrokenAbsoluteImages(),

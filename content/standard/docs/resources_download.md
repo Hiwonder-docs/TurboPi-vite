@@ -1,6 +1,7 @@
 # Appendix
 
 - System Image & Source Code：If you want to get the system image and source code, please email us at support@hiwonder.com, and share your order number :)
+- Google Drive: [TurboPi Resources](https://drive.google.com/drive/folders/1LW9jAawLl52kcrALQuNdu5RyeOMZVGgR?usp=sharing)
 - SD Card Formatting Tool：[SD_CardFormatter0500SetupEN.exe](https://drive.google.com/drive/folders/1ccPgiDB3uLotfyrotek_aKl6Tl9FoV_g?usp=sharing)
 - Image Burning Tool：[Image Burning Tool.zip](https://drive.google.com/drive/folders/1ioDdr1ywd_1Ko8r6FBgMY13vBoF4cWAx?usp=sharing)
 - PuTTY（ssh）32bit：[putty-0.72-installer.msi](https://drive.google.com/drive/folders/1Jf92DfW07wkucgNCvkfFrZQdcP3qSPJe?usp=sharing)

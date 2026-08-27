@@ -1,23 +1,32 @@
 # TurboPi Documentation
 
 This repository contains the TurboPi VitePress documentation site. The source
-files for each version are stored under `content/standard/docs/` and
-`content/advanced/docs/`.
+files for each version are stored under `content/standard/` and
+`content/advanced/`.
 
 ## Local development
 
-Install dependencies and start the local documentation server:
+Install dependencies and start a version-specific documentation server:
 
 ```bash
 npm ci
+npm run dev:standard
+npm run dev:advanced
+```
+
+The legacy VitePress command still works against the current `docs/` working
+copy:
+
+```bash
 npm run docs:dev
 ```
 
-Build the production site and stage the artifacts:
+## Build
+
+Build both versions and stage the production artifacts:
 
 ```bash
-npm run docs:build
-npm run docs:stage-main
+npm run build:all
 ```
 
 The staged production files are generated in:

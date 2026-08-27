@@ -8,17 +8,23 @@ import ImageViewer from './ImageViewer.vue'
 const { frontmatter } = useData()
 const route = useRoute()
 
+const versionItems = [
+  { key: 'standard', label: 'Standard' },
+  { key: 'advanced', label: 'Advanced' }
+]
+
+function getCurrentVersionKey() {
+  return versionItems.find((item) => location.pathname.includes(`/en/${item.key}/`))?.key || versionItems[0].key
+}
+
 function injectVersionSwitcher() {
   if (!inBrowser) return
   const navList = document.querySelector('.VPNavBarMenu')
   if (!navList) return
   if (navList.querySelector('.version-switcher')) return
 
-  const current = location.pathname.includes('/en/advanced/') ? 'advanced' : 'standard'
-  const labels: Record<string, string> = {
-    standard: 'Standard',
-    advanced: 'Advanced'
-  }
+  const current = getCurrentVersionKey()
+  const labels = Object.fromEntries(versionItems.map((item) => [item.key, item.label])) as Record<string, string>
 
   const li = document.createElement('li')
   li.className = 'version-switcher'
@@ -28,8 +34,12 @@ function injectVersionSwitcher() {
       <span class="version-switcher__name">${labels[current]}</span>
     </button>
     <ul class="version-switcher__menu" style="display:none">
-      <li class="version-switcher__item ${current === 'standard' ? 'is-selected' : ''}" data-version="standard">Standard</li>
-      <li class="version-switcher__item ${current === 'advanced' ? 'is-selected' : ''}" data-version="advanced">Advanced</li>
+      ${versionItems
+        .map(
+          (item) =>
+            `<li class="version-switcher__item ${current === item.key ? 'is-selected' : ''}" data-version="${item.key}">${item.label}</li>`
+        )
+        .join('')}
     </ul>
   `
 
@@ -71,10 +81,10 @@ function interceptCrossVersionLinks() {
     const href = link.getAttribute('href') || ''
     if (!href || href.startsWith('http://') || href.startsWith('https://')) return
 
-    const currentVersion = location.pathname.includes('/en/advanced/') ? 'advanced' : 'standard'
-    const otherVersion = currentVersion === 'standard' ? 'advanced' : 'standard'
+    const currentVersion = getCurrentVersionKey()
+    const targetVersion = versionItems.find((item) => href.includes(`/en/${item.key}/`))?.key
 
-    if (href.includes(`/en/${otherVersion}/`)) {
+    if (targetVersion && targetVersion !== currentVersion) {
       e.preventDefault()
       e.stopPropagation()
       const origin = window.location.origin
