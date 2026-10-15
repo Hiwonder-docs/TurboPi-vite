@@ -14,4 +14,4 @@
 
 ### [OpenCV Computer Vision Lesson](https://wiki.hiwonder.com/projects/General_basic_courses/en/latest/docs/7_opencv.html)
 
-### [Raspberry Pi Series Robot Network Configuration Instruction](https://wiki.hiwonder.com/projects/General_basic_courses/en/latest/docs/7_network_configuration.html)
+### [Raspberry Pi Series Robot Network Configuration Instruction](https://wiki.hiwonder.com/projects/General_basic_courses/en/latest/docs/8_network_configuration.html)
